@@ -7,7 +7,8 @@ def modelling(sample_size, tt_ratio, balancing, top_N, model_approach):
 	# Read data from files
 	patients = pd.read_csv('data/patients.csv')
 	patients = patients[['subject_id','gender']]
-
+      
+        # Select files according to requirements
 	if top_N == 1:
 		diagnoses = pd.read_csv('data/top_500.csv')
 	elif top_N == 0:
@@ -42,7 +43,7 @@ def modelling(sample_size, tt_ratio, balancing, top_N, model_approach):
 		percent_round = str(round(percent_copy, 3))
 		print('Data file 1/0 ratio is {}.'.format(percent_round))
 
-
+                # When balancing equals 1, make the number of positive attributes equal to the number of negative attributes by self-copying, otherwise keep the original ratio
 		if balancing == 1:
 
 			check_1 = df_1.sample(n = int(percent * N), random_state = 42, replace = False)
@@ -94,10 +95,8 @@ def modelling(sample_size, tt_ratio, balancing, top_N, model_approach):
 
 	data['gender'] = data['gender'].astype(float)
 
-	#data.to_excel(r'C:\Users\sudisheng\Desktop\data.xlsx',index = False)
-	#data = pd.read_excel(r'C:\Users\sudisheng\Desktop\data.xlsx')
 
-	# manage 'admisson_type', 'admission_location' & 'icd_code', encode to 0/1, and remove/rewrite orginal data
+	# using one-hot encoding to manage 'admisson_type', 'admission_location' & 'icd_code', and remove/rewrite orginal data
 	classify_cols = ['admission_type','admission_location','icd_code']
 	check_cols = []
 
@@ -438,7 +437,12 @@ def modelling(sample_size, tt_ratio, balancing, top_N, model_approach):
 
 
 if __name__ == '__main__':
-
-	#modelling(sample_size, tt_ratio, balancing, top_N, model_approach)
-
+	'''
+	modelling(sample_size, tt_ratio, balancing, top_N, model_approach)
+	sample_size: the number of data
+	tt_ratio: the ratio of test and train sample
+	balancing: Type of ratio of positive and negetive sample
+	top_N: The size of icd_code
+	model_approach: Code of algorithm
+        '''
 	modelling(300, 0.3, 1, 1, 2)
