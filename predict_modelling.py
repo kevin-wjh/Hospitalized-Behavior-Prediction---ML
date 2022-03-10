@@ -1,17 +1,3 @@
-'''
-Yihao:
-This is the program which gives prediction mainly using SK-learn as the tool.
-Methods applied: One-hot encoding, Desicion tree, SVM & Random-forest classifiers.
-
-
-Future improvements:
-1. Repeated codes in 3 classifiers can be simplified
-2. ROC diagrams: how to save?
-
-
-'''
-
-
 import pandas as pd
 import time
 
